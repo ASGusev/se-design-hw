@@ -6,13 +6,12 @@ private const val promptTemplate = "%s>"
  * A REPL command line interface for execution system.
  */
 class CommandLineInterface(private val system: ExecutionSystem) {
-    private val prompt = "${system.workingDirectory}>"
-
     /**
      * Runs REPL cycle.
      */
     fun run() {
         while (true) {
+            val prompt = "${system.workingDirectory}>"
             print(prompt)
             val input = readLine() ?: break
 

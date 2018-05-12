@@ -12,6 +12,8 @@ fun main(args: Array<String>) {
     environment.registerUtility("pwd", PwdUtility)
     environment.registerUtility("grep", GrepUtility)
     environment.registerUtility("exit", ExitUtility)
+    environment.registerUtility("ls", LsUtility)
+    environment.registerUtility("cd", CdUtility)
 
     val cli =
         CommandLineInterface(

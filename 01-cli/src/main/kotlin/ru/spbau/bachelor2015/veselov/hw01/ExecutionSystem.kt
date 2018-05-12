@@ -12,8 +12,9 @@ class ExecutionSystem(
     private val executor: CommandExecutor,
     private val environment: Environment
 ) {
-    val workingDirectory
+    var workingDirectory = ""
         get() = environment.workingDirectory.getPath().toString()
+        private set
 
     /**
      * Executes given string of code.
