@@ -8,6 +8,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import java.nio.charset.Charset
 
 class WcUtilityTest {
@@ -22,7 +23,7 @@ class WcUtilityTest {
         FileUtils.writeStringToFile(file, "abc \n abd", Charset.defaultCharset())
 
         val executionResult =
-                WcUtility.execute(listOf(file.absolutePath), "")
+                WcUtility.execute(listOf(file.absolutePath), "", WorkingDirectory())
 
         MatcherAssert.assertThat(
             executionResult,
@@ -41,7 +42,7 @@ class WcUtilityTest {
     }
 
     private fun testInputStream(input: String, output: String) {
-        val executionResult = WcUtility.execute(listOf(), input)
+        val executionResult = WcUtility.execute(listOf(), input, WorkingDirectory())
 
         MatcherAssert.assertThat(
             executionResult,

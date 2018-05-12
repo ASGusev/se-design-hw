@@ -2,21 +2,23 @@ package ru.spbau.bachelor2015.veselov.hw01.utilities
 
 import org.apache.commons.io.FileUtils.readFileToByteArray
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import ru.spbau.bachelor2015.veselov.hw01.environment.Utility
 import java.nio.charset.Charset
 import java.nio.file.Path
-import java.nio.file.Paths
 
 /**
  * Wc utility counts number of newlines, words and bytes in given files. If command receives no
  * arguments then input stream is used.
  */
 object WcUtility : Utility {
-    override fun execute(args: List<String>, input: String): ExecutionResult {
+    override fun execute(args: List<String>, input: String, workingDirectory: WorkingDirectory):
+            ExecutionResult {
         val output = if (args.isEmpty()) {
             countStatistics(input.toByteArray(Charset.defaultCharset())).toString()
         } else {
-            args.joinToString("\n") { countFileStatistics(Paths.get(it)).toString() }
+            args.joinToString("\n")
+            { countFileStatistics(workingDirectory.resolve(it)).toString() }
         } + "\n"
 
         return ExecutionResult(output, false)

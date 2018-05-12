@@ -36,7 +36,7 @@ class Environment : SymbolsResolver {
      * @return execution result.
      */
     fun executeUtility(name: String, args: List<String>, input: String): ExecutionResult {
-        return utilities[name]?.execute(args, input) ?:
+        return utilities[name]?.execute(args, input, workingDirectory) ?:
                executeUnregisteredUtility(name, args, input)
     }
 
