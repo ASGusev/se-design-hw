@@ -1,17 +1,19 @@
 package ru.spbau.bachelor2015.veselov.hw01
 
-private const val promptTemplate = ">"
+private const val promptTemplate = "%s>"
 
 /**
  * A REPL command line interface for execution system.
  */
 class CommandLineInterface(private val system: ExecutionSystem) {
+    private val prompt = "${system.workingDirectory}>"
+
     /**
      * Runs REPL cycle.
      */
     fun run() {
         while (true) {
-            print(promptTemplate)
+            print(prompt)
             val input = readLine() ?: break
 
             try {
