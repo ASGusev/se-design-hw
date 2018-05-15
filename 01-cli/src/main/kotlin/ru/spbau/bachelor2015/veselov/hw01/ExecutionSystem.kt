@@ -12,13 +12,17 @@ class ExecutionSystem(
     private val executor: CommandExecutor,
     private val environment: Environment
 ) {
+    var workingDirectory = ""
+        get() = environment.workingDirectory.getPath().toString()
+        private set
+
     /**
      * Executes given string of code.
      *
      * @param code a string to execute.
      * @return execution result.
      */
-   fun execute(code: String): ExecutionResult {
-       return executor.execute(assembler.assemble(code), "", environment)
-   }
+    fun execute(code: String): ExecutionResult {
+        return executor.execute(assembler.assemble(code), "", environment)
+    }
 }

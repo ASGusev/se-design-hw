@@ -7,10 +7,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import java.io.File
 import java.nio.charset.Charset
 
 class GrepUtilityTest {
+    private val workingDirectory = WorkingDirectory()
+
     @Rule
     @JvmField
     val folder = TemporaryFolder()
@@ -28,7 +31,8 @@ class GrepUtilityTest {
         MatcherAssert.assertThat(
             GrepUtility.execute(
                 listOf("bc") + files.map{ it.absolutePath },
-                ""
+                "",
+                    workingDirectory
             ),
             CoreMatchers.`is`(CoreMatchers.equalTo(ExecutionResult(expected, false)))
         )
@@ -75,7 +79,8 @@ class GrepUtilityTest {
         MatcherAssert.assertThat(
             GrepUtility.execute(
                 listOf(pattern) + options + file.absolutePath,
-                ""
+                "",
+                    workingDirectory
             ),
             CoreMatchers.`is`(CoreMatchers.equalTo(ExecutionResult(expected, false)))
         )
@@ -90,7 +95,8 @@ class GrepUtilityTest {
         MatcherAssert.assertThat(
             GrepUtility.execute(
                 listOf(pattern) + options,
-                input
+                input,
+                    workingDirectory
             ),
             CoreMatchers.`is`(CoreMatchers.equalTo(ExecutionResult(expected, false)))
         )

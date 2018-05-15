@@ -8,6 +8,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import java.nio.charset.Charset
 
 class CatUtilityTest {
@@ -27,7 +28,7 @@ class CatUtilityTest {
         writeStringToFile(file2, content2, Charset.defaultCharset())
 
         val executionResult =
-            CatUtility.execute(listOf(file1.absolutePath, file2.absolutePath), "")
+            CatUtility.execute(listOf(file1.absolutePath, file2.absolutePath), "", WorkingDirectory())
 
         assertThat(
             executionResult,

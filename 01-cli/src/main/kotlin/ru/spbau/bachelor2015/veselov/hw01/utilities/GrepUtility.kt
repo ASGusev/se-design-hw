@@ -5,12 +5,14 @@ import ru.spbau.bachelor2015.veselov.hw01.environment.Utility
 
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Stream
 
 object GrepUtility : Utility {
-    override fun execute(args: List<String>, input: String): ExecutionResult {
+    override fun execute(args: List<String>, input: String, workingDirectory: WorkingDirectory):
+            ExecutionResult {
         val parsedArgs = ArgParser(args.toTypedArray()).parseInto(::Arguments)
 
         return ExecutionResult(
@@ -31,7 +33,7 @@ object GrepUtility : Utility {
                             wordsMatching
                         ))
 
-                        1 -> Files.lines(Paths.get(files.single())).use {
+                        1 -> Files.lines(workingDirectory.resolve(files.single())).use {
                             append(processStream(
                                 regex,
                                 it,

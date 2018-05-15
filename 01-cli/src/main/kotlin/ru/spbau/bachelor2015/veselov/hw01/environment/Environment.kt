@@ -1,6 +1,7 @@
 package ru.spbau.bachelor2015.veselov.hw01.environment
 
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 import ru.spbau.bachelor2015.veselov.hw01.tokenization.SymbolsResolver
 import java.nio.charset.Charset
 
@@ -12,6 +13,8 @@ class Environment : SymbolsResolver {
     private val symbols: MutableMap<String, String> = mutableMapOf()
 
     private val utilities: MutableMap<String, Utility> = mutableMapOf()
+
+    val workingDirectory = WorkingDirectory()
 
     /**
      * Registers an utility.
@@ -33,7 +36,7 @@ class Environment : SymbolsResolver {
      * @return execution result.
      */
     fun executeUtility(name: String, args: List<String>, input: String): ExecutionResult {
-        return utilities[name]?.execute(args, input) ?:
+        return utilities[name]?.execute(args, input, workingDirectory) ?:
                executeUnregisteredUtility(name, args, input)
     }
 

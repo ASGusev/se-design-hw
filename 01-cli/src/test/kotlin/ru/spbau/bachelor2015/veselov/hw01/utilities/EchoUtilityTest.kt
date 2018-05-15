@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import ru.spbau.bachelor2015.veselov.hw01.ExecutionResult
+import ru.spbau.bachelor2015.veselov.hw01.WorkingDirectory
 
 class EchoUtilityTest {
     @Test
@@ -12,7 +13,7 @@ class EchoUtilityTest {
         val arg2 = "efg"
 
         val executionResult =
-                EchoUtility.execute(listOf(arg1, arg2), "")
+                EchoUtility.execute(listOf(arg1, arg2), "", WorkingDirectory())
 
         assertThat(
             executionResult,
